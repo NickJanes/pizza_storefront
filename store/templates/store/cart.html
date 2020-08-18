@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-lg-12">
+    <div class="box-element">
+      <a  class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continue Shopping</a>
+      <h2 style="float: right;">
+        {% if user.is_authenticated %}
+          {{request.user|title }}'s
+        {% else %}
+          Your 
+        {% endif %}
+
+        {% if order.delivery %}
+        Delivery
+        {% else %}
+        Takeout
+        {% endif %}
+        
+        {{test}}
+
+        Order
+      </h2>
+
+      <br>
+      <br>
+
+      <table class="table">
+        <tr>
+          <th><h5>Items: <strong>{{ order.quantity }}</strong></h5></th>
+          <th><h5>Total: <strong>${{ order.total }}</strong></h5></th>
+          <th>
+            {% if order.delivery %}
+            <button style="float: right" class="btn btn-warning takeout-btn">
+              Switch to Takeout
+            </button>
+            {% else %}
+            <button style="float: right" class="btn btn-info takeout-btn">
+              Switch to Delivery
+            </button>
+            {% endif %}
+          </th>
+          <th>
+            <a style="float: right" class="btn btn-success" href="{% url 'checkout'%}">Check Out</a>
+          </th>
+        </tr>
+
+      </table>
+    </div>
+
+    <br>
+
+    <div class="box-element">
+      <div class="cart-row">
+        <div style="flex: 2"><strong>Item</strong></div>
+        <div style="flex: 2"><strong>Size</strong></div>
+        <div style="flex: 1"><strong>Price</strong></div>
+        <div style="flex: 1"><strong>Quantity</strong></div>
+        <div style="flex: 1"><strong>Total</strong></div>
+        <div style="flex: 1"></div>
+      </div>
+
+      {% for item in items %}
+      <div class="cart-row">
+        <div style="flex: 2">{{ item.product.name }}</div>
+        <div style="flex: 2">
+          <div class="btn-group" role="group">
+            <button id="btnGroupDrop1" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Size
+            </button>
+            <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+              {% for s in size %}
+              <a class="dropdown-item" href="#">{{s}}</a>
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+        <div style="flex: 1">${{item.product.price|floatformat:2}}</div>
+        <div style="flex: 1"><strong>{{item.quantity}}</strong>
+          <strong data-product="{{item.product.id}}" data-action="add" class="chg-quantity update-cart">+</strong>
+          <strong data-product="{{item.product.id}}" data-action="remove" class="chg-quantity update-cart">-</strong>
+        </div>
+        <div style="flex: 1"><strong>${{item.total|floatformat:2}}</strong></div>
+        <div style="flex: 1"><strong class="btn btn-danger update-cart" data-product="{{item.product.id}}" data-action="delete">Remove</strong></div>
+      </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</div>
+
+{% endblock %}
+

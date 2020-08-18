@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Store{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12 col-lg-2 box-element">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link active" href="#">Appetizers & Sides</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Salads</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Subs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pizzas</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Pastas</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-lg-10">
+    <div class="card-columns">
+      {% for product in products %}
+      <div class="card">
+        {% if product.img != null %}
+        <img class="card-img-top img-fluid" src="images/{{ product.img }}">
+        {% endif %}
+        <div class="card-block box-element">
+          <h4 class="card-title">{{product.name}}</h4>
+          <hr>
+          <a class="btn btn-outline-secondary" href="#">Edit</a>
+          <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-danger add-btn update-cart"> Add to Cart</button>
+          <h4 style="float: right;">${{product.price|floatformat:2}}</h4>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}
