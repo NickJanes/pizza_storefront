@@ -84,18 +84,20 @@ def updateItem(request):
     # CART
     # CHECKOUT 
 
-def store(request):
+def store(request, productType = None):
     products = Product.objects.all()
-    context = {'products':products}
+    productTypes = ProductType.objects.all()
 
-    context.update(getPizzaOptions())
+    context = {'products':products, 'productTypes': productTypes, 'productType': productType}
+
+    #context.update(getPizzaOptions())
     context.update(cartData(request))
 
     return render(request, 'store/store.html', context)
 
 def cart(request):
     context = {}
-    context.update(getPizzaOptions())
+    #context.update(getPizzaOptions())
     context.update(cartData(request))
     
 
@@ -105,7 +107,7 @@ def cart(request):
 def checkout(request):
 
     context = {}
-    context.update(getPizzaOptions())
+    #context.update(getPizzaOptions())
     context.update(cartData(request))
     
     return render(request, 'store/checkout.html', context)

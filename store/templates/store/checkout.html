@@ -38,14 +38,13 @@
 						<input class="form-control" type="text" name="country" placeholder="Country..">
 					</div>
         </div>
-        {% endif %}
-
         <hr>
         <input id="form-button" class="btn btn-success btn-block" type="submit" value="Continue">
+        {% endif %}
     </div>
     
     <br>
-    <div class="box-element hidden" id="payment-info">
+    <div class="box-element " {% if order.delivery %} "hidden" {%endif%} id="payment-info">
       <small>Paypal Options</small>
       <div id="paypal-button-container"></div>
 

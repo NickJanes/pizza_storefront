@@ -6,27 +6,21 @@
 <div class="row">
   <div class="col-12 col-lg-2 box-element">
     <ul class="nav flex-column">
+      {% for pt in productTypes %}
       <li class="nav-item">
-        <a class="nav-link active" href="#">Appetizers & Sides</a>
+        <a class="nav-link active" href="{% url 'store_product' productType=pt.name %}">{{ pt.name }}</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Salads</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Subs</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pizzas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">Pastas</a>
-      </li>
+      {% endfor %}
     </ul>
   </div>
   <div class="col-lg-10">
-    <div class="card-columns">
+    <div class="row box-element" id="section-header">
+      <h1>{{productType}}</h1>
+    </div>
+    <div class="row">
       {% for product in products %}
-      <div class="card">
+      <div class="col-lg-4">
+        <div class="box-element product">
         {% if product.img != null %}
         <img class="card-img-top img-fluid" src="images/{{ product.img }}">
         {% endif %}
@@ -36,6 +30,7 @@
           <a class="btn btn-outline-secondary" href="#">Edit</a>
           <button data-product="{{product.id}}" data-action="add" class="btn btn-outline-danger add-btn update-cart"> Add to Cart</button>
           <h4 style="float: right;">${{product.price|floatformat:2}}</h4>
+        </div>
         </div>
       </div>
       {% endfor %}

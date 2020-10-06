@@ -1,11 +1,11 @@
 import json
 from .models import *
 
-def getPizzaOptions():
-    toppings = Topping.objects.all()
-    sizes = PizzaSize.objects.all()
+#def getPizzaOptions():
+    #toppings = Topping.objects.all()
+    #sizes = PizzaSize.objects.all()
 
-    return {'size': sizes, 'topping': toppings}
+    #return {'size': sizes, 'topping': toppings}
 
 def cookieCart(request):
     try:
