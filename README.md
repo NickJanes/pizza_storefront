@@ -1,13 +1,13 @@
 # Description
 An inhouse online ordering system.
 
-#Features:
-##Current:
+# Features:
+## Current:
 - Guest checkout
 - Order confirmation screen
 - Paypal payments
 - Cart management
-##Planned: 
+## Planned: 
 - Delivery enforcement range thanks to google maps encoding api
 - Dynamic expected order completion time
 - Modular product database for easy adaptation
